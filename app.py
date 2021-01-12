@@ -9,6 +9,7 @@ Example:
 import sys
 import fire
 import questionary
+import csv
 from pathlib import Path
 
 from qualifier.utils.fileio import load_csv
@@ -61,6 +62,9 @@ def get_applicant_info():
     return credit_score, debt, income, loan_amount, home_value
 
 
+qualified_loan_list = []
+
+
 def find_qualifying_loans(bank_data, credit_score, debt, income, loan, home_value):
     """Determine which loans the user qualifies for.
 
@@ -99,7 +103,28 @@ def find_qualifying_loans(bank_data, credit_score, debt, income, loan, home_valu
 
     print(f"Found {len(bank_data_filtered)} qualifying loans")
 
-    return bank_data_filtered
+    for loan in bank_data_filtered:
+        qualified_loan_list.append(loan)
+
+    return bank_data_filtered   
+
+# header = ["Lender","Max Loan Amount","Max LTV","Max DTI","Min Credit Score","Interest Rate"]
+# output_path = Path("data\qualifying_loans.csv")
+# with open(output_path,'w',newline='') as csvfile:
+#     csvwriter = csv.writer(csvfile)
+#     csvwriter.writerow(header)
+#     for loan in qualified_loan_list:
+#         csvwriter.writerow(loan.values())
+
+def save_csv(list):
+    """Saves the qualifying loans to a CSV file in the data folder."""
+    header = ["Lender","Max Loan Amount","Max LTV","Max DTI","Min Credit Score","Interest Rate"]
+    output_path = Path("data\qualifying_loans.csv")
+    with open(output_path,'w',newline='') as csvfile:
+        csvwriter = csv.writer(csvfile)
+        csvwriter.writerow(header)
+        for loan in qualified_loan_list:
+            csvwriter.writerow(loan.values())
 
 
 def save_qualifying_loans(qualifying_loans):
@@ -132,3 +157,5 @@ def run():
 
 if __name__ == "__main__":
     fire.Fire(run)
+
+# "C:\Users\billy\Documents\GitHub\loan_qualifier\data\daily_rate_sheet.csv"
