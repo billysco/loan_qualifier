@@ -32,7 +32,8 @@ def load_bank_data():
         The bank data from the data rate sheet CSV file.
     """
 
-    csvpath = questionary.text("Enter a file path to a rate-sheet (.csv):").ask()
+    # csvpath = questionary.text("Enter a file path to a rate-sheet (.csv):").ask()
+    csvpath = "data\daily_rate_sheet.csv"
     csvpath = Path(csvpath)
     if not csvpath.exists():
         sys.exit(f"Oops! Can't find this path: {csvpath}")
@@ -52,6 +53,12 @@ def get_applicant_info():
     income = questionary.text("What's your total monthly income?").ask()
     loan_amount = questionary.text("What's your desired loan amount?").ask()
     home_value = questionary.text("What's your home value?").ask()
+
+    # credit_score = 750
+    # debt = 250
+    # income = 5000
+    # loan_amount = 250000
+    # home_value = 500000
 
     credit_score = int(credit_score)
     debt = float(debt)
@@ -106,8 +113,9 @@ def find_qualifying_loans(bank_data, credit_score, debt, income, loan, home_valu
     for loan in bank_data_filtered:
         qualified_loan_list.append(loan)
 
-    return bank_data_filtered   
+    return bank_data_filtered  
 
+# print(qualified_loan_list)
 # header = ["Lender","Max Loan Amount","Max LTV","Max DTI","Min Credit Score","Interest Rate"]
 # output_path = Path("data\qualifying_loans.csv")
 # with open(output_path,'w',newline='') as csvfile:
@@ -116,15 +124,15 @@ def find_qualifying_loans(bank_data, credit_score, debt, income, loan, home_valu
 #     for loan in qualified_loan_list:
 #         csvwriter.writerow(loan.values())
 
-def save_csv(list):
-    """Saves the qualifying loans to a CSV file in the data folder."""
-    header = ["Lender","Max Loan Amount","Max LTV","Max DTI","Min Credit Score","Interest Rate"]
-    output_path = Path("data\qualifying_loans.csv")
-    with open(output_path,'w',newline='') as csvfile:
-        csvwriter = csv.writer(csvfile)
-        csvwriter.writerow(header)
-        for loan in qualified_loan_list:
-            csvwriter.writerow(loan.values())
+# def save_csv(list):
+#     """Saves the qualifying loans to a CSV file in the data folder."""
+#     header = ["Lender","Max Loan Amount","Max LTV","Max DTI","Min Credit Score","Interest Rate"]
+#     output_path = Path("data\qualifying_loans.csv")
+#     with open(output_path,'w',newline='') as csvfile:
+#         csvwriter = csv.writer(csvfile)
+#         csvwriter.writerow(header)
+#         for loan in qualified_loan_list:
+#             csvwriter.writerows(loan.values())
 
 
 def save_qualifying_loans(qualifying_loans):
@@ -133,8 +141,21 @@ def save_qualifying_loans(qualifying_loans):
     Args:
         qualifying_loans (list of lists): The qualifying bank loans.
     """
-    # @TODO: Complete the usability dialog for savings the CSV Files.
-    # YOUR CODE HERE!
+    print(qualifying_loans)
+    ans = questionary.confirm("Would you like to save the list of qualifying loans?").ask()
+    print(ans)
+    if not ans:
+        sys.exit("Thank you for using this program.")
+    header = ["Lender","Max Loan Amount","Max LTV","MYax DTI","Min Credit Score","Interest Rate"]
+    # print(header)
+    output_path = Path("data\qualifying_loans.csv")
+    with open(output_path,'w',newline='') as csvfile:
+        csvwriter = csv.writer(csvfile)
+        csvwriter.writerow(header)
+        csvwriter.writerows(qualifying_loans)
+        # for loan in qualifying_loans:
+        #     print(loan)
+        #     csvwriter.writerows(loan)
 
 
 def run():
@@ -157,5 +178,3 @@ def run():
 
 if __name__ == "__main__":
     fire.Fire(run)
-
-# "C:\Users\billy\Documents\GitHub\loan_qualifier\data\daily_rate_sheet.csv"
