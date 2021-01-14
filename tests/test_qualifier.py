@@ -1,3 +1,5 @@
+import csv
+import questionary
 # Import pathlib
 from pathlib import Path
 
@@ -14,8 +16,17 @@ from qualifier.filters import loan_to_value
 from qualifier.filters import max_loan_size
 
 def test_save_csv():
-    # @TODO: Your code here!
     # Use Path from pathlib to output the test csv to ./data/output/qualifying_loans.csv
+    assert Path('data/qualifying_loans.csv').exists()
+    # ans = questionary.confirm("Would you like to save the list of qualifying loans?").ask()
+    # if not ans:
+    #     sys.exit("Thank you for using this program.")
+    # header = ["Lender","Max Loan Amount","Max LTV","MYax DTI","Min Credit Score","Interest Rate"]
+    # output_path = Path("data\qualifying_loans.csv")
+    # with open(output_path,'w',newline='') as csvfile:
+    #     csvwriter = csv.writer(csvfile)
+    #     csvwriter.writerow(header)
+    #     csvwriter.writerows(qualifying_loans)
 
 def test_calculate_monthly_debt_ratio():
     assert calculators.calculate_monthly_debt_ratio(1500, 4000) == 0.375

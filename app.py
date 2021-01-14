@@ -32,8 +32,8 @@ def load_bank_data():
         The bank data from the data rate sheet CSV file.
     """
 
-    # csvpath = questionary.text("Enter a file path to a rate-sheet (.csv):").ask()
-    csvpath = "data\daily_rate_sheet.csv"
+    csvpath = questionary.text("Enter a file path to a rate-sheet (.csv):").ask()
+    # csvpath = "data\daily_rate_sheet.csv"
     csvpath = Path(csvpath)
     if not csvpath.exists():
         sys.exit(f"Oops! Can't find this path: {csvpath}")
@@ -115,15 +115,6 @@ def find_qualifying_loans(bank_data, credit_score, debt, income, loan, home_valu
 
     return bank_data_filtered  
 
-# print(qualified_loan_list)
-# header = ["Lender","Max Loan Amount","Max LTV","Max DTI","Min Credit Score","Interest Rate"]
-# output_path = Path("data\qualifying_loans.csv")
-# with open(output_path,'w',newline='') as csvfile:
-#     csvwriter = csv.writer(csvfile)
-#     csvwriter.writerow(header)
-#     for loan in qualified_loan_list:
-#         csvwriter.writerow(loan.values())
-
 # def save_csv(list):
 #     """Saves the qualifying loans to a CSV file in the data folder."""
 #     header = ["Lender","Max Loan Amount","Max LTV","Max DTI","Min Credit Score","Interest Rate"]
@@ -141,9 +132,9 @@ def save_qualifying_loans(qualifying_loans):
     Args:
         qualifying_loans (list of lists): The qualifying bank loans.
     """
-    print(qualifying_loans)
+    # print(qualifying_loans)
     ans = questionary.confirm("Would you like to save the list of qualifying loans?").ask()
-    print(ans)
+    # print(ans)
     if not ans:
         sys.exit("Thank you for using this program.")
     header = ["Lender","Max Loan Amount","Max LTV","MYax DTI","Min Credit Score","Interest Rate"]
