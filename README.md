@@ -1,32 +1,20 @@
-# Project Title
+# Loan Qualifier
 
-Just after the title, introduce your project by describing attractively what the project is about and what is the main problem that inspires you to create this project or what is the main contribution for the potential user of your project.
+This project aims to match borrowers with loans they are qualified for.  The borrower is asked to provide their credit score, monthly debt, monthly income, desired loan amount, and property value. Using the provided information, the program matches borrowers with the loans they are qualified to recieve.  
 
 ---
 
 ## Technologies
 
-Describe the technologies required to use your project such as programming languages, libraries, frameworks, and operating systems. Be sure to include the specific versions of any critical dependencies that you have used in the stable version of your project.
-
----
-
-## Installation Guide
-
-In this section, you should include detailed installation notes containing code blocks and screenshots.
-
----
-
-## Examples
-
-This section should include screenshots, code blocks, or animations showing how your project works.
+The code is written in Python using version 3.8.3 and uses the fire, questionary, csv, sys, and pathlib libraries.
 
 ---
 
 ## Usage
 
-This section should include screenshots, code blocks, or animations explaining how to use your project.
+The borrower will be asked to provide their credit score, monthly debt, monthly income, desired loan amount, and property value through a command line prompt. They will then have the choice to save the loans they are qualified for to a csv file or exit the program without saving.
 
----
+--- 
 
 ## Contributors
 

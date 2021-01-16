@@ -33,7 +33,6 @@ def load_bank_data():
     """
 
     csvpath = questionary.text("Enter a file path to a rate-sheet (.csv):").ask()
-    # csvpath = "data\daily_rate_sheet.csv"
     csvpath = Path(csvpath)
     if not csvpath.exists():
         sys.exit(f"Oops! Can't find this path: {csvpath}")
@@ -53,12 +52,6 @@ def get_applicant_info():
     income = questionary.text("What's your total monthly income?").ask()
     loan_amount = questionary.text("What's your desired loan amount?").ask()
     home_value = questionary.text("What's your home value?").ask()
-
-    # credit_score = 750
-    # debt = 250
-    # income = 5000
-    # loan_amount = 250000
-    # home_value = 500000
 
     credit_score = int(credit_score)
     debt = float(debt)
